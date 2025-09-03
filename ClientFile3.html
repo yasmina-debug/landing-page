@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page Details</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom styles from your main tool */
+    .step-content { display: block; }
+    .navigation-buttons {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e5e7eb;
+    }
+    .platform-option.active {
+      border-color: #3b82f6;
+      background-color: #eff6ff;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+    <div class="bg-white p-6 rounded-xl shadow-lg">
+      <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-2">Project Details Form</h1>
+      <p class="text-center text-gray-500 mb-6">Please fill out the form below and send the downloaded file to your designer.</p>
+
+      <div id="step-2" class="step-content">
+        <h2 class="text-xl font-semibold mb-4 text-gray-700">Content Details</h2>
+        <div class="space-y-4">
+          <div>
+            <label for="clientName" class="font-bold text-gray-600">Client Name <span class="text-red-500">*</span></label>
+            <input type="text" id="clientName" class="w-full mt-1 p-2 border rounded-md" placeholder="e.g., Jane Doe" required />
+          </div>
+          <div>
+            <label for="productDescription" class="font-bold text-gray-600">Product/Service Description</label>
+            <textarea id="productDescription" class="w-full mt-1 p-2 border rounded-md" rows="3" placeholder="e.g., An e-commerce platforms that sells beauty and health products in the GCC region."></textarea>
+          </div>
+          <div>
+            <label for="targetAudience" class="font-bold text-gray-600">Target Audience</label>
+            <input type="text" id="targetAudience" class="w-full mt-1 p-2 border rounded-md" placeholder="e.g., Women in their 20-50s, that are interested in makeup trends and skin care products."/>
+          </div>
+          
+          <div>
+            <label class="font-bold text-gray-600 block mb-2">Platform Target</label>
+            <div id="platformOptions" class="flex flex-col md:flex-row gap-3">
+              <div 
+                class="platform-option flex items-center p-4 bg-white border border-gray-300 rounded-md shadow-sm cursor-pointer hover:border-blue-400 transition w-full"
+                data-platform="mobile"
+              >
+                <span class="text-gray-700 font-medium">Mobile</span>
+              </div>
+              <div 
+                class="platform-option flex items-center p-4 bg-white border border-gray-300 rounded-md shadow-sm cursor-pointer hover:border-blue-400 transition w-full"
+                data-platform="desktop"
+              >
+                <span class="text-gray-700 font-medium">Desktop</span>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <label for="toneSelect" class="font-bold text-gray-600">Tone</label>
+            <select id="toneSelect" class="w-full mt-1 p-2 border rounded-md">
+              <option value="professional">Professional</option>
+              <option value="friendly">Friendly</option>
+              <option value="elegant">Elegant</option>
+              <option value="bold">Bold</option>
+              <option value="custom">Custom...</option>
+            </select>
+            <input type="text" id="customToneInput" class="w-full mt-2 p-2 border rounded-md hidden" placeholder="Enter custom tone"/>
+          </div>
+          <div>
+            <label for="goalsSelect" class="font-bold text-gray-600">Page Goals</label>
+            <select id="goalsSelect" class="w-full mt-1 p-2 border rounded-md">
+              <option value="collect leads">Collect Leads</option>
+              <option value="sell a product">Sell a Product</option>
+              <option value="explain a service">Explain a Service</option>
+              <option value="build brand awareness">Build Brand Awareness</option>
+              <option value="custom">Custom...</option>
+            </select>
+            <input type="text" id="customGoalsInput" class="w-full mt-2 p-2 border rounded-md hidden" placeholder="Enter custom goals (e.g. improve user retention)"/>
+          </div>
+          <div>
+            <label for="additionalComments" class="font-bold text-gray-600">Additional Comments</label>
+            <textarea id="additionalComments" class="w-full mt-1 p-2 border rounded-md" rows="3" placeholder="Add any extra information, specific details, or instructions for the AI."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div id="step-3" class="step-content">
+        <h2 class="text-xl font-semibold mb-4 text-gray-700">Visual Assets</h2>
+        <p class="text-gray-600 mb-4">Upload image files (JPG, PNG, WebP, etc.)</p>
+        <div 
+          id="image-dropzone" 
+          class="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-6 bg-gray-50 text-center cursor-pointer hover:bg-gray-100 transition"
+        >
+          <input type="file" id="imageInput" accept="image/*" multiple class="hidden" />
+          <p class="text-gray-500" id="image-dropzone-text">Drag & drop images here, or click to upload</p>
+        </div>
+        <div id="imagePreview" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 hidden"></div>
+      </div>
+
+      <div id="step-4" class="step-content">
+        <h2 class="text-xl font-semibold mb-4 text-gray-700">Style Guide</h2>
+        <div>
+          <label for="styleInspiration" class="font-bold text-gray-600">Style Inspiration</label>
+          <textarea id="styleInspiration" class="w-full mt-1 p-2 border rounded-md" rows="3" placeholder="Describe the style you want for the page. e.g., 'Minimalist, modern, with a dark color scheme.'"></textarea>
+        </div>
+        <div 
+          id="pdf-dropzone" 
+          class="mt-6 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-6 bg-gray-50 text-center cursor-pointer hover:bg-gray-100 transition"
+        >
+          <input type="file" id="pdfInput" accept=".pdf" class="hidden" />
+          <p class="text-gray-500" id="pdf-dropzone-text">Drag & drop a PDF here, or click to upload</p>
+        </div>
+        <div id="pdfPreview" class="mt-2 text-sm text-green-700 font-medium hidden"></div>
+      </div>
+
+      <button id="submit-form-button" class="mt-8 w-full bg-blue-500 text-white font-bold py-3 rounded-lg hover:bg-blue-600">
+        Submit Project File
+      </button>
+    </div>
+  </div>
+
+<script>
+  let selectedPlatforms = new Set();
+  
+  function handleCustomInputs() {
+    const toneSelect = document.getElementById('toneSelect');
+    const customToneInput = document.getElementById('customToneInput');
+    const goalsSelect = document.getElementById('goalsSelect');
+    const customGoalsInput = document.getElementById('customGoalsInput');
+    toneSelect.addEventListener('change', () => {
+      customToneInput.classList.toggle('hidden', toneSelect.value !== 'custom');
+      if (toneSelect.value !== 'custom') customToneInput.value = '';
+    });
+    goalsSelect.addEventListener('change', () => {
+      customGoalsInput.classList.toggle('hidden', goalsSelect.value !== 'custom');
+      if (goalsSelect.value !== 'custom') customGoalsInput.value = '';
+    });
+  }
+  
+  function setupFileHandling() {
+    const imageDropzone = document.getElementById("image-dropzone");
+    const imageInput = document.getElementById("imageInput");
+    const imagePreview = document.getElementById("imagePreview");
+    const imageDropzoneText = document.getElementById("image-dropzone-text");
+    const pdfDropzone = document.getElementById("pdf-dropzone");
+    const pdfInput = document.getElementById("pdfInput");
+    const pdfPreview = document.getElementById("pdfPreview");
+    const pdfDropzoneText = document.getElementById("pdf-dropzone-text");
+    let uploadedFiles = [];
+    imageDropzone.addEventListener("click", () => imageInput.click());
+    imageDropzone.addEventListener("dragover", (e) => { e.preventDefault(); imageDropzone.classList.add("bg-green-50", "border-green-300"); });
+    imageDropzone.addEventListener("dragleave", () => { imageDropzone.classList.remove("bg-green-50", "border-green-300"); });
+    imageDropzone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      imageDropzone.classList.remove("bg-green-50", "border-green-300");
+      uploadedFiles = [...uploadedFiles, ...Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'))];
+      renderFiles();
+    });
+    imageInput.addEventListener("change", (e) => {
+      uploadedFiles = [...uploadedFiles, ...Array.from(e.target.files).filter(f => f.type.startsWith('image/'))];
+      renderFiles();
+    });
+    pdfDropzone.addEventListener("click", () => pdfInput.click());
+    pdfDropzone.addEventListener("dragover", (e) => { e.preventDefault(); pdfDropzone.classList.add("bg-green-50", "border-green-300"); });
+    pdfDropzone.addEventListener("dragleave", () => { pdfDropzone.classList.remove("bg-green-50", "border-green-300"); });
+    pdfDropzone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      pdfDropzone.classList.remove("bg-green-50", "border-green-300");
+      const file = Array.from(e.dataTransfer.files).find(f => f.type === 'application/pdf');
+      if (file) {
+        uploadedFiles = uploadedFiles.filter(f => f.type !== 'application/pdf');
+        uploadedFiles.push(file);
+        renderFiles();
+      }
+    });
+    pdfInput.addEventListener("change", (e) => {
+      const file = Array.from(e.target.files).find(f => f.type === 'application/pdf');
+      if (file) {
+        uploadedFiles = uploadedFiles.filter(f => f.type !== 'application/pdf');
+        uploadedFiles.push(file);
+        renderFiles();
+      }
+    });
+    function renderFiles() {
+      imagePreview.innerHTML = '';
+      pdfPreview.innerHTML = '';
+      imageDropzoneText.textContent = "Drag & drop images here, or click to upload";
+      pdfDropzoneText.textContent = "Drag & drop a PDF here, or click to upload";
+      const images = uploadedFiles.filter(f => f.type.startsWith('image/'));
+      const pdf = uploadedFiles.find(f => f.type === 'application/pdf');
+      if (images.length > 0) {
+        imagePreview.classList.remove("hidden");
+        imageDropzoneText.textContent = `${images.length} images selected.`;
+        images.forEach(file => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.alt = file.name;
+            img.className = "w-full h-32 object-cover rounded shadow";
+            imagePreview.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        });
+      } else {
+        imagePreview.classList.add("hidden");
+      }
+      if (pdf) {
+        pdfPreview.classList.remove("hidden");
+        pdfPreview.textContent = `Uploaded: ${pdf.name}`;
+        pdfDropzoneText.textContent = "1 PDF selected.";
+      } else {
+        pdfPreview.classList.add("hidden");
+      }
+    }
+    return {
+      getFiles: () => uploadedFiles,
+    };
+  }
+  function initPlatformSelection() {
+    document.querySelectorAll('.platform-option').forEach(option => {
+      option.addEventListener('click', () => {
+        document.querySelectorAll('.platform-option').forEach(o => { o.classList.remove('active'); });
+        selectedPlatforms.clear();
+        const platform = option.getAttribute('data-platform');
+        option.classList.add('active');
+        selectedPlatforms.add(platform);
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    handleCustomInputs();
+    const fileHandler = setupFileHandling();
+    initPlatformSelection();
+
+    document.getElementById('submit-form-button').addEventListener('click', async () => {
+      document.getElementById('submit-form-button').textContent = 'Submitting...';
+      const data = {
+        clientName: document.getElementById('clientName').value,
+        productDescription: document.getElementById('productDescription').value,
+        targetAudience: document.getElementById('targetAudience').value,
+        platformTarget: selectedPlatforms.size > 0 ? Array.from(selectedPlatforms)[0] : null,
+        tone: document.getElementById('toneSelect').value === 'custom' ? document.getElementById('customToneInput').value : document.getElementById('toneSelect').value,
+        goals: document.getElementById('goalsSelect').value === 'custom' ? document.getElementById('customGoalsInput').value : document.getElementById('goalsSelect').value,
+        additionalComments: document.getElementById('additionalComments').value,
+        styleInspiration: document.getElementById('styleInspiration').value,
+        files: await Promise.all(fileHandler.getFiles().map(file => {
+          return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => resolve({
+              name: file.name,
+              type: file.type,
+              dataUrl: e.target.result
+            });
+            reader.readAsDataURL(file);
+          });
+        }))
+      };
+
+      try {
+      console.log('Attempting to submit form to server...');
+      const response = await fetch('https://landing-page-api-yvhj.onrender.com/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log('Server responded successfully!', response.status);
+        alert('Form submitted successfully!');
+      } else {
+        console.error('Server responded with an error:', response.status);
+        alert('Submission failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('An error occurred during the fetch request:', error);
+      alert('An error occurred. Please check the console for details.');
+    } finally {
+      document.getElementById('submit-form-button').textContent = 'Submit Project File';
+    }
+
+    });
+  });
+</script>
+</body>
+</ht
