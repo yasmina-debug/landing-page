@@ -1,0 +1,13 @@
+{
+  "routes": [
+    {
+      "src": "/submit-form",
+      "dest": "server.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "ClientFile3.html"
+    }
+  ]
+}
