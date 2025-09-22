@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const { jsPDF } = require("jspdf");
+const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -23,6 +24,11 @@ const transporter = nodemailer.createTransport({
         user: 'yasmina@acquisit.io',
         pass: 'skxh gyya ezcl rlfj'
     }
+});
+
+// Add a GET route to serve the HTML file at the root URL
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'ClientFile3.html'));
 });
 
 app.post('/submit-form', async (req, res) => {
@@ -113,6 +119,7 @@ app.post('/submit-form', async (req, res) => {
                     <li><strong>Target Audience:</strong> ${data.targetAudience}</li>
                     <li><strong>Tone:</strong> ${data.tone}</li>
                     <li><strong>Page Goals:</strong> ${data.goals}</li>
+                    <li><strong>Image Link:</strong> ${data.imageLink}</li>
                 </ul>`,
             attachments: attachments
         };
