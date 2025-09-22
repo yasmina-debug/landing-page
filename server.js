@@ -59,6 +59,7 @@ app.post('/submit-form', async (req, res) => {
         addText('Page Goals', data.goals);
         addText('Additional Comments', data.additionalComments);
         addText('Style Inspiration', data.styleInspiration);
+        addText('Image Link', data.imageLink);
 
         data.files.forEach(file => {
             if (file.type.startsWith('image/')) {
