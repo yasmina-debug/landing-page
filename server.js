@@ -119,7 +119,7 @@ app.post('/submit-form', async (req, res) => {
                     <li><strong>Target Audience:</strong> ${data.targetAudience}</li>
                     <li><strong>Tone:</strong> ${data.tone}</li>
                     <li><strong>Page Goals:</strong> ${data.goals}</li>
-                    <li><strong>Image Link:</strong> ${data.imageLink}</li>
+                    ${data.imageLink ? `<li><strong>Image Link:</strong> ${data.imageLink}</li>` : ''}
                 </ul>`,
             attachments: attachments
         };
