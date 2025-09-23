@@ -67,20 +67,23 @@ app.post('/submit-form', async (req, res) => {
         addText('Style Inspiration', data.styleInspiration);
         addText('Image Link', data.imageLink);
 
-        data.files.forEach(file => {
-            if (file.type.startsWith('image/')) {
-                doc.addPage();
-                doc.setFont("helvetica", "bold");
-                doc.text(`Attached Image: ${file.name}`, 15, 15);
-                doc.addImage(file.dataUrl, file.type.split('/')[1].toUpperCase(), 15, 20, 180, 100);
-            } else if (file.type === 'application/pdf') {
-                doc.addPage();
-                doc.setFont("helvetica", "bold");
-                doc.text(`Attached PDF: ${file.name}`, 15, 15);
-                doc.setFont("helvetica", "normal");
-                doc.text('This PDF file has been attached to the email.', 15, 25);
-            }
-        });
+        // Add a check to ensure data.files is an array before calling forEach
+        if (Array.isArray(data.files)) {
+            data.files.forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    doc.addPage();
+                    doc.setFont("helvetica", "bold");
+                    doc.text(`Attached Image: ${file.name}`, 15, 15);
+                    doc.addImage(file.dataUrl, file.type.split('/')[1].toUpperCase(), 15, 20, 180, 100);
+                } else if (file.type === 'application/pdf') {
+                    doc.addPage();
+                    doc.setFont("helvetica", "bold");
+                    doc.text(`Attached PDF: ${file.name}`, 15, 15);
+                    doc.setFont("helvetica", "normal");
+                    doc.text('This PDF file has been attached to the email.', 15, 25);
+                }
+            });
+        }
 
         const pdfBuffer = doc.output('arraybuffer');
 
@@ -97,14 +100,17 @@ app.post('/submit-form', async (req, res) => {
                 contentType: 'application/pdf'
             }
         ];
-
-        data.files.forEach(file => {
-            attachments.push({
-                filename: file.name,
-                content: file.dataUrl.split(';base64,')[1],
-                encoding: 'base64'
+        
+        // Add a check to ensure data.files is an array before calling forEach
+        if (Array.isArray(data.files)) {
+            data.files.forEach(file => {
+                attachments.push({
+                    filename: file.name,
+                    content: file.dataUrl.split(';base64,')[1],
+                    encoding: 'base64'
+                });
             });
-        });
+        }
 
         const mailOptions = {
             from: 'yasmina@acquisit.io',
